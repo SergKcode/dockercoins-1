@@ -20,7 +20,7 @@ jobs:
       -
         name: build_worker
         run: docker build -f worker/Dockerfile - t eleigle/python:Redis-requests build/    
-name:
+name: CI
 on:
   push:
     branches:
