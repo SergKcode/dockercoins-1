@@ -1,0 +1,28 @@
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+    steps:
+      -
+        name: checkout
+        uses: actions/checkout@v2
+      -
+        name: build_context
+        run: mkdir build/
+      -
+        name: build_hasher
+        run: docker build -f hasher/Dockerfile - t fav1c0n/ruby:sinatra-thin build/
+      -
+        name: build_rng
+        run: docker build -f rng/Dockerfile - t eleigle/python:Flask build/
+      -
+        name: build_webui
+        run: docker build -f webui/Dockerfile - t eleigle/node:express-redis build/
+      -
+        name: build_worker
+        run: docker build -f worker/Dockerfile - t eleigle/python:Redis-requests build/    
+name:
+on:
+  push:
+    branches:
+      -
+        2022-03-santander
